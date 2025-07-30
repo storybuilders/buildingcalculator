@@ -31,7 +31,7 @@ export default function Home() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: parseFloat(value) || 0 });
+    setInputs({ ...inputs, [name]: name === "finishLevel" ? value : parseFloat(value) || 0 });
   };
 
   const baseCosts = costTable[inputs.finishLevel];
@@ -63,35 +63,4 @@ export default function Home() {
             <input
               type="number"
               name={field.name}
-              value={inputs[field.name as keyof typeof inputs]}
-              onChange={handleChange}
-              className="mt-1 block w-full border p-2 rounded"
-            />
-          </div>
-        ))}
-        <div>
-          <label className="block text-sm font-medium">Finish Level</label>
-          <select
-            name="finishLevel"
-            value={inputs.finishLevel}
-            onChange={handleChange}
-            className="mt-1 block w-full border p-2 rounded"
-          >
-            <option value="mid">Mid</option>
-            <option value="high">High</option>
-            <option value="luxury">Luxury</option>
-          </select>
-        </div>
-      </div>
-      <div className="border-t pt-4 space-y-2">
-        <p><strong>Living Area Cost:</strong> ${livingCost.toLocaleString()}</p>
-        <p><strong>Garage Cost:</strong> ${garageCost.toLocaleString()}</p>
-        <p><strong>Subtotal Construction:</strong> ${subtotal.toLocaleString()}</p>
-        <p><strong>Builder Margin:</strong> ${margin.toLocaleString()}</p>
-        <p><strong>Adjusted Total Build:</strong> ${adjustedTotal.toLocaleString()}</p>
-        <p><strong>Total Project Cost:</strong> ${totalProjectCost.toLocaleString()}</p>
-        <p><strong>Cost Per Sq Ft:</strong> ${costPerSqFt.toFixed(2)}</p>
-      </div>
-    </main>
-  );
-}
+              v
