@@ -23,7 +23,7 @@ export default function Home() {
     siteWork: 35000
   });
 
-  const costTable = {
+  const costTable: Record<"mid" | "high" | "luxury", { living: number; garage: number }> = {
     mid: { living: 170, garage: 65 },
     high: { living: 200, garage: 75 },
     luxury: { living: 240, garage: 90 }
@@ -34,12 +34,14 @@ export default function Home() {
     setInputs({ ...inputs, [name]: parseFloat(value) || 0 });
   };
 
-  const baseCosts = costTable[inputs.finishLevel] || costTable.mid;
+  const baseCosts = costTable[inputs.finishLevel];
   const livingCost = inputs.homeSize * baseCosts.living;
   const garageCost = inputs.garageSize * baseCosts.garage;
   const subtotal = livingCost + garageCost;
   const margin = subtotal * (inputs.builderMargin / 100);
-  const adjustedTotal = (subtotal + margin + inputs.permits + inputs.siteWork) * (1 + inputs.locationAdjustment / 100);
+  const adjustedTotal =
+    (subtotal + margin + inputs.permits + inputs.siteWork) *
+    (1 + inputs.locationAdjustment / 100);
   const totalProjectCost = adjustedTotal + inputs.lotCost;
   const costPerSqFt = totalProjectCost / inputs.homeSize;
 
