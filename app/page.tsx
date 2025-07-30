@@ -63,4 +63,24 @@ export default function Home() {
             <input
               type="number"
               name={field.name}
-              v
+              value={inputs[field.name as keyof typeof inputs]}
+              onChange={handleChange}
+              className="mt-1 block w-full border p-2 rounded"
+            />
+          </div>
+        ))}
+        <div>
+          <label className="block text-sm font-medium">Finish Level</label>
+          <select
+            name="finishLevel"
+            value={inputs.finishLevel}
+            onChange={handleChange}
+            className="mt-1 block w-full border p-2 rounded"
+          >
+            <option value="mid">Mid</option>
+            <option value="high">High</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
+      </div>
+      <div className="border-t pt-4 space-
