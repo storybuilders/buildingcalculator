@@ -20,7 +20,8 @@ export default function Home() {
     luxury: { living: 240, garage: 90 }
   };
 
-  const handleChange = (e) => {
+const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: parseFloat(value) || 0 });
   };
