@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Home() {
   const [inputs, setInputs] = useState<{
@@ -20,18 +20,21 @@ export default function Home() {
     builderMargin: 15,
     permits: 15000,
     lotCost: 200000,
-    siteWork: 35000
+    siteWork: 35000,
   });
 
   const costTable: Record<"mid" | "high" | "luxury", { living: number; garage: number }> = {
     mid: { living: 170, garage: 65 },
     high: { living: 200, garage: 75 },
-    luxury: { living: 240, garage: 90 }
+    luxury: { living: 240, garage: 90 },
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: name === "finishLevel" ? value : parseFloat(value) || 0 });
+    setInputs({
+      ...inputs,
+      [name]: name === "finishLevel" ? value : parseFloat(value) || 0,
+    });
   };
 
   const baseCosts = costTable[inputs.finishLevel];
@@ -56,31 +59,7 @@ export default function Home() {
           { label: "Builder Margin (%)", name: "builderMargin" },
           { label: "Permits & Fees ($)", name: "permits" },
           { label: "Lot Cost ($)", name: "lotCost" },
-          { label: "Site Work ($)", name: "siteWork" }
+          { label: "Site Work ($)", name: "siteWork" },
         ].map((field) => (
           <div key={field.name}>
-            <label className="block text-sm font-medium">{field.label}</label>
-            <input
-              type="number"
-              name={field.name}
-              value={inputs[field.name as keyof typeof inputs]}
-              onChange={handleChange}
-              className="mt-1 block w-full border p-2 rounded"
-            />
-          </div>
-        ))}
-        <div>
-          <label className="block text-sm font-medium">Finish Level</label>
-          <select
-            name="finishLevel"
-            value={inputs.finishLevel}
-            onChange={handleChange}
-            className="mt-1 block w-full border p-2 rounded"
-          >
-            <option value="mid">Mid</option>
-            <option value="high">High</option>
-            <option value="luxury">Luxury</option>
-          </select>
-        </div>
-      </div>
-      <div className="border-t pt-4 space-
+            <label className="block text-sm font-medium">{
