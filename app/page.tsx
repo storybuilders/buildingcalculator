@@ -3,7 +3,16 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<{
+    homeSize: number;
+    garageSize: number;
+    finishLevel: "mid" | "high" | "luxury";
+    locationAdjustment: number;
+    builderMargin: number;
+    permits: number;
+    lotCost: number;
+    siteWork: number;
+  }>({
     homeSize: 2200,
     garageSize: 600,
     finishLevel: "mid",
@@ -20,8 +29,7 @@ export default function Home() {
     luxury: { living: 240, garage: 90 }
   };
 
-const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: parseFloat(value) || 0 });
   };
@@ -53,7 +61,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
             <input
               type="number"
               name={field.name}
-              value={inputs[field.name]}
+              value={inputs[field.name as keyof typeof inputs]}
               onChange={handleChange}
               className="mt-1 block w-full border p-2 rounded"
             />
